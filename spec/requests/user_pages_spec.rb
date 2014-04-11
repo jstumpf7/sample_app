@@ -1,22 +1,26 @@
 require 'spec_helper'
 
-describe "UserPages" do
+describe "User pages" do
 
 subject { page }
-
-
+  
   describe "signup page" do
+    before { visit signup_path }
+	
+	it {should have_content('Sign up') }
+    it {should have_title(full_title('Sign Up')) }
+    
+  end
+
+  describe "signup" do
 
     before { visit signup_path }
-
-    it {should have_content('Sign up') }
-    it {should have_title(full_title('Sign Up')) }
-
+	
 	let(:submit) { "Create my account" }
 	
 	describe "with invalid information" do
 		it "should not create a user" do
-			expect { click_on submit }.not_to change(User, :count)
+			expect { click_button submit }.not_to change(User, :count)
 		end
 	end
 	
@@ -24,12 +28,12 @@ subject { page }
 		before do
 			fill_in "Name",			with: "Jonathan Stumpf"
 			fill_in "Email",		with: "jstumpf@gmail.com"
-			fill_in "Password",		with: "yes"
-			fill_in "Confirmation", with: "yes"
+			fill_in "Password",		with: "foobar"
+			fill_in "Confirmation", with: "foobar"
 		end
 		it "should create a user" do
 			expect do
-				click button submit
+				click_button submit
 			end.to change(User, :count).by(1)
 		end
 	end
