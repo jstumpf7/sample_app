@@ -29,7 +29,7 @@ subject { page }
 			fill_in "Name",			with: "Jonathan Stumpf"
 			fill_in "Email",		with: "jstumpf@gmail.com"
 			fill_in "Password",		with: "foobar"
-			fill_in "Confirmation", with: "foobar"
+			fill_in "Password confirmation", with: "foobar"
 		end
 		it "should create a user" do
 			expect do
